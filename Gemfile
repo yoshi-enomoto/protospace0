@@ -45,3 +45,8 @@ group :development do
   gem 'spring'
 end
 
+gem "haml-rails"
+gem "erb2haml"
+gem "pry-rails"
+#Sass、Scss用のブーストラップ導入
+gem "bootstrap-sass"
