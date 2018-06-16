@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # サインアウト後のリダイレクト先を設定
-  # def after_sign_out_path_for(resource)
-  #   new_user_session_path
-  # end
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 
   # サインアップ時の追加項目用のストパラ設定
   def configure_permitted_parameters
