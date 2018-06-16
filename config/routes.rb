@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'users/show'
+
+  devise_for :users
   root "prototypes#index"
 
   # 『root』でindexを設定している為、下記にindexは不要となる。
