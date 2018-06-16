@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # 『root』でindexを設定している為、下記にindexは不要となる。
   resources :prototypes, only: [:new, :show]
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
