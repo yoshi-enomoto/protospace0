@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  get 'users/show'
-
   devise_for :users
   root "prototypes#index"
 
   # 『root』でindexを設定している為、下記にindexは不要となる。
   resources :prototypes, only: [:new, :show]
+  resources :users, only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
