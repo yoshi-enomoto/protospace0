@@ -1,7 +1,7 @@
 class PrototypeImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -29,9 +29,11 @@ class PrototypeImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
-  # end
+  version :large do
+    process resize_to_fit: [800, 500]
+    # 下記、キープの為記述残し。
+    # process :resize_to_fill => [50, 50]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -44,4 +46,8 @@ class PrototypeImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def default_url
+      '/uploads/noimage.png'
+  end
 end
