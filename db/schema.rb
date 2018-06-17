@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614174140) do
+ActiveRecord::Schema.define(version: 20180617140556) do
+
+  create_table "prototypes", force: :cascade do |t|
+    t.string   "title",      limit: 255,   null: false
+    t.string   "catch_copy", limit: 255,   null: false
+    t.text     "concept",    limit: 65535, null: false
+    t.integer  "user_id",    limit: 4,     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "prototypes", ["user_id"], name: "fk_rails_8add56efc2", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255,   default: "", null: false
@@ -37,4 +48,5 @@ ActiveRecord::Schema.define(version: 20180614174140) do
   add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "prototypes", "users"
 end
