@@ -4,11 +4,17 @@ class Prototype < ActiveRecord::Base
 
   # 『protoytpe』にネストされた『captured_image』に対して投稿できるようにする。
   # ネストされているモデルを記載。キーではない。
-  accepts_nested_attributes_for :captured_images
   # コントローラー側には『captured_images_attributes: [:content]』でパラメータ許可する
+  accepts_nested_attributes_for :captured_images, reject_if: :reject_sub_images
+    #『reject_if:』を書くことで、保存が不要な場合は保存しない設定をする事が可能。
+    # procとmethodのシンボルの２方法で指定可能。
 
   validates :title,
             :catch_copy,
             :concept,
             presence: true
+
+  def reject_sub_images(attributed)
+    attributed['content'].blank?
+  end
 end
