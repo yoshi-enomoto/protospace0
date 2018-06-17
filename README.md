@@ -57,8 +57,8 @@ belongs_to :user
 ## CapturedImageテーブル
 |Column|Type|Options|
 |------|----|-------|
-|content|string|null:false, -gem-|
-|status|integer|null: false|
+|content|string|-gem-|
+|status|integer|-|
 |prototype|references|null: false, foreign_key: true|
 
 ### association
