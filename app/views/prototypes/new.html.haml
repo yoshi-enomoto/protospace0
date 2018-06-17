@@ -1,28 +1,44 @@
-%form.container.proto-new{action: ""}
+-# 『required: true』を記述することで、フロント側での空送信のバリデートをかける
+
+= form_for @prototype, html: {class: "container proto-new"} do |f|
+  -# 下記の記載を書けば、コントローラ側で受け取るキーの記述のみで良い。
+  = f.hidden_field :user_id, value: current_user.id
   .col-md-8.col-md-offset-2
     %header.row.user-nav.row
       .col-md-12
-        %input.proto-new-title{type: "text", placeholder: "Title"}
+        = f.text_field :title, required: true, class: "proto-new-title", placeholder: "Title"
+
+    -# ファイルを選択させる箇所で、『hidden_field』のstatusのvalueを設定することで、画像がメインかサブかを指定させる。
     .row
       .col-md-12
         .cover-image-upload
-          %input{type: "file"}
+          = f.fields_for :captured_images do |image|
+            %img
+            = image.file_field :content, required: true
+            = image.hidden_field :status, value: "main"
       .col-md-12
         %ul.proto-sub-list.list-group
-          %li.list-group-item.col-md-4
-            .image-upload
-              %input{type: "file"}
-          %li.list-group-item.col-md-4
-            .image-upload
-              %input{type: "file"}
-          %li.list-group-item.col-md-4
-            .image-upload-plus
-              %span +
+          -# サブ画像は３つまでの為、このように記述する（コントローラ側で設定してない為）
+          - 3.times do |i|
+            %li.list-group-item.col-md-4
+              .image-upload
+                = f.fields_for :captured_images do |image|
+                  %img
+                  = image.file_field :content
+                  = image.hidden_field :status, value: "sub"
+          -# 静的ページ時の記述を残す（３つ目がアイコン『+』で表示されていたので）
+            %li.list-group-item.col-md-4
+              .image-upload
+                %input{type: "file"}
+            %li.list-group-item.col-md-4
+              .image-upload-plus
+                %span +
+
     .row.proto-description
       .col-md-12
-        %input{type: "text", placeholder: "Catch Copy"}
+        = f.text_field :catch_copy, required: true, placeholder: "Catch Copy"
       .col-md-12
-        %textarea{name: "", cols: "30", rows: "4", placeholder: "Concept"}
+        = f.text_area :concept, required: true, cols: "30", rows: "4", placeholder: "Concept"
       .col-md-12
         %h4 Tag List
         .row
@@ -33,4 +49,4 @@
           .col-md-3
             %input{type: "text", placeholder: "Application"}
     .row.text-center.proto-btn
-      %button.btn.btn-lg.btn-primary.btn-block{type: "submit"} Publish
+      = f.submit "Publish", class: "btn btn-lg btn-primary btn-block"
