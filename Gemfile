@@ -51,3 +51,5 @@ gem "pry-rails"
 #Sass、Scss用のブーストラップ導入
 gem "bootstrap-sass"
 gem "devise"
+gem 'carrierwave'
+gem 'mini_magick'
