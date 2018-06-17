@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "prototypes#index"
 
   # 『root』でindexを設定している為、下記にindexは不要となる。
-  resources :prototypes, only: [:new, :show]
+  resources :prototypes, only: [:new, :show, :create]
   resources :users, only: [:show, :edit, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
