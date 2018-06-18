@@ -9,7 +9,7 @@
             .user-name.col-md-10
               = f.text_field :name, placeholder: "Input Username", autofocus: true, require: true
             .user-image.col-md-2
-              %img{ style: ""}
+              %button.btn.btn-primary Add image
               = f.file_field :avatar
           .user-email
             = f.text_field :email, placeholder: "Input Email", require: true
