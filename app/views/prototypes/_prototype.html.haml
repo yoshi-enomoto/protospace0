@@ -7,7 +7,7 @@
       %li
         = link_to "Delete", prototype_path(prototype), method: :delete, rel: "nofollow"
       %li
-        = link_to "Edit", ""
+        = link_to "Edit", edit_prototype_path(prototype)
 
   .thumbnail
     = link_to image_tag(prototype.set_main_thumbnail), prototype_path(prototype)
