@@ -17,4 +17,16 @@ class Prototype < ActiveRecord::Base
   def reject_sub_images(attributed)
     attributed['content'].blank?
   end
+
+  #『prototypes』内のビューで使用するインスタンスメソッドをここに定義
+  def set_main_thumbnail
+    captured_images.main.first.content
+  end
+
+  def posted_date
+    created_at.strftime('%b %d %a')
+    # 『%b』は月の省略名
+    # 『%d』は日にち
+    # 『%a』は曜日の省略名
+  end
 end
