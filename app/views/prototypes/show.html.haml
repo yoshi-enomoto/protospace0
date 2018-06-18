@@ -3,15 +3,22 @@
     .col-md-6
       .media
         .media-left
-          %a{href: "#"}
-            %img.media-object{alt: "64x64", "data-holder-rendered": "true", "data-src": "holder.js/64x64", src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEzLjQ2MDkzNzUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==", style: "width: 64px; height: 64px;"}
+          = link_to user_path(@prototype.user) do
+            = image_tag(@prototype.user.avatar.thumb, alt: "profile_photo", class: "media-object", style: "width: 64px; height: 64px;")
+            -# 『.thumb』はuploaderで定めた為、使用可能。
+        -#
+          下記の書き方はこの場合、シンタックスエラーとなる。
+          = link_to image_tag(@prototype.user.avatar) user_path(@prototype.user)
+
         .media-body
           %h4#top-aligned-media.media-heading
-            Top aligned media
+            =@prototype.title
           .proto-user
-            %a{href: ""} by User
-            %span.degree we-b inc. Designer
+            by
+            = link_to "#{@prototype.user.name}",user_path(@prototype.user)
+            %span.degree= @prototype.user.occupation
 
+    / 未設定
     .col-md-6.text-right
       %button.btn.btn-default
         = image_tag("icon_heart.svg")
@@ -19,22 +26,22 @@
         %span.num 20
   .row
     .col-md-9
-      = image_tag("sample.png", class: "img-responsive")
+      = image_tag(@prototype.set_main_thumbnail.large, class: "img-responsive", style: "margin: 0 auto;")
     .col-md-3
       %ul.proto-sub-list.list-group
-        %li.list-group-item
-          = image_tag("sample.png", class: "img-responsive")
-        %li.list-group-item
-          = image_tag("sample.png", class: "img-responsive")
-        %li.list-group-item
-          = image_tag("sample.png", class: "img-responsive")
+        -# 『sub』とすることでサブのみの取り出しが可能。
+        - @prototype.captured_images.sub.each do |image|
+          %li.list-group-item
+            = image_tag(image.content, class: 'img-responsive')
+
   .row.proto-description
     .col-md-3
       %h4 Catch Copy
-      %p Type something
+      %p= @prototype.catch_copy
     .col-md-6
       %h4 Concept
-      %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis
+      %p= @prototype.concept
+    / 未設定
     .col-md-3
       %h4 Tag List
       %ul.proto-tag-list.list-inline
@@ -42,6 +49,7 @@
           %a{href: "#", class: "btn btn-default"} iPad
         %li
           %a{href: "#", class: "btn btn-default"} wireframe
+  / 未設定
   .row.proto-comments
     %h4.col-md-12
       Comments

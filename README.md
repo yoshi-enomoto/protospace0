@@ -40,9 +40,9 @@ has_many :comments
 ## Prototypeテーブル
 |Column|Type|Options|
 |------|----|-------|
-|title|text|null: false|
-|catch_copy|text|-|
-|concept|text|-|
+|title|string|null: false|
+|catch_copy|string|null: false|
+|concept|text|null: false|
 |user|references|null: false, foreign_key: true|
 
 ### association
@@ -57,8 +57,8 @@ belongs_to :user
 ## CapturedImageテーブル
 |Column|Type|Options|
 |------|----|-------|
-|content|text|null:false, -gem-|
-|status|intger|null: false|
+|content|string|-gem-|
+|status|integer|-|
 |prototype|references|null: false, foreign_key: true|
 
 ### association
