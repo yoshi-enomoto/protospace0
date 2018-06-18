@@ -9,6 +9,7 @@
   %body
     -# 『layouts』フォルダ内には『application.html.haml』のみにした方が良い？
     = render "shared/header"
+    = render "shared/notification"
     = yield
     = render "shared/footer"
     -# 『boostrap』はheader、footerで与えているクラス名で記載すると、それに適用したデザインをscss無しで充てる。
