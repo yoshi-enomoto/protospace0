@@ -1,4 +1,5 @@
 class PrototypesController < ApplicationController
+  before_action :set_prototype, only: [:show, :edit, :update, :destroy]
   def index
     @prototypes = Prototype.includes(:user).order("created_at ASC").page(params[:page]).per(5)
   end
@@ -21,7 +22,15 @@ class PrototypesController < ApplicationController
   end
 
   def show
-    @prototype = Prototype.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
   end
 
   private
@@ -36,5 +45,9 @@ class PrototypesController < ApplicationController
       :user_id,
       captured_images_attributes: [:content, :status]
     )
+  end
+
+  def set_prototype
+    @prototype = Prototype.find(params[:id])
   end
 end
