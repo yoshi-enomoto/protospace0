@@ -1,5 +1,15 @@
 -# 部分テンプレートでは、『@』を使用しないで取り出しが可能。
 .col-sm-4.col-md-3.proto-content
+  - if prototype.user_id == current_user.id
+    .dropdown.drop_menu_location
+      %button.btn.btn-default.dropdown-toggle(data-toggle="dropdown" id="dropdownMenu")
+        Action
+      %ul.dropdown-menu(aria-labelledby="dropdownMenu1")
+        %li
+          = link_to "Delete", prototype_path(prototype), method: :delete, rel: "nofollow"
+        %li
+          = link_to "Edit", edit_prototype_path(prototype)
+
   .thumbnail
     = link_to image_tag(prototype.set_main_thumbnail), prototype_path(prototype)
     -# = link_to image_tag(prototype.captured_images.main.first.content), prototype_path(prototype)：メソッド定義前

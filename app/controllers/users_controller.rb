@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # 未ログイン時の場合は、サインインページへリダイレクトされる。
 
   def show
-    @prototypes = @user.prototypes.includes(:user)
+    @prototypes = @user.prototypes.includes(:user).order("created_at ASC").page(params[:page]).per(5)
   end
 
   def edit
