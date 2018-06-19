@@ -13,6 +13,8 @@
       .col-md-12
         .cover-image-upload
           = f.fields_for :captured_images do |image|
+          -# コントローラ側でインスタンスを生成していない場合は下記の書き方
+          -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
             %img
             = image.file_field :content, required: true
             = image.hidden_field :status, value: "main"
@@ -23,6 +25,8 @@
             %li.list-group-item.col-md-4
               .image-upload
                 = f.fields_for :captured_images do |image|
+                -# コントローラ側でインスタンスを生成していない場合は下記の書き方
+                -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
                   %img
                   = image.file_field :content
                   = image.hidden_field :status, value: "sub"
