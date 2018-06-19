@@ -1,0 +1,63 @@
+= form_for @prototype, html: {class: "container proto-new"} do |f|
+  = f.hidden_field :user_id, value: current_user.id
+  .col-md-8.col-md-offset-2
+    %header.row.user-nav.row
+      .col-md-12
+        = f.text_field :title, required: true, class: "proto-new-title", placeholder: "Title"
+
+    .row
+      .col-md-12
+        .cover-image-upload
+          = f.fields_for :captured_images, @main do |image|
+            -# 『:captured_images』の後にインスタンス変数を記載することで、コントローラから値を呼び出している。
+            -# 呼び出している値は、新規作成時に保存したもの。
+            %img
+            = image.file_field :content, required: true
+            = image.hidden_field :status, value: "main"
+      .col-md-12
+        %ul.proto-sub-list.list-group
+          - 3.times do |i|
+            -# この中の処理を3回実施する、ifルート、elseルート含めて。
+            %li.list-group-item.col-md-4
+              - if @subs
+                -# 条件分岐を入れることで既存の更新、もしくは新規追加かを切り分ける
+                - @sub = @subs[i]
+                -# 『@subs』は配列なので、展開する。
+                .image-upload
+                  = f.fields_for :captured_images, @sub do |image|
+                    / = f.fields_for :captured_images, @prototype.captured_images.where(status: 1) do |image|
+                    %img
+                    = image.file_field :content
+                    = image.hidden_field :status, value: "sub"
+              - else
+                -# 新規追加時（ビューのnewと同じ原理）
+                .image-upload
+                  = f.fields_for :captured_images do |image|
+                    / = f.fields_for :captured_images, @prototype.captured_images.where(status: 1) do |image|
+                    %img
+                    = image.file_field :content
+                    = image.hidden_field :status, value: "sub"
+          -# 静的ページ時の記述を残す（３つ目がアイコン『+』で表示されていたので）
+            %li.list-group-item.col-md-4
+              .image-upload
+                %input{type: "file"}
+            %li.list-group-item.col-md-4
+              .image-upload-plus
+                %span +
+
+    .row.proto-description
+      .col-md-12
+        = f.text_field :catch_copy, required: true, placeholder: "Catch Copy"
+      .col-md-12
+        = f.text_area :concept, required: true, cols: "30", rows: "4", placeholder: "Concept"
+      .col-md-12
+        %h4 Tag List
+        .row
+          .col-md-3
+            %input{type: "text", placeholder: "Web Design"}
+          .col-md-3
+            %input{type: "text", placeholder: "UI"}
+          .col-md-3
+            %input{type: "text", placeholder: "Application"}
+    .row.text-center.proto-btn
+      = f.submit "Publish", class: "btn btn-lg btn-primary btn-block"
