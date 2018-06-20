@@ -13,8 +13,8 @@
       .col-md-12
         .cover-image-upload
           = f.fields_for :captured_images do |image|
-          -# コントローラ側でインスタンスを生成していない場合は下記の書き方
-          -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
+            -# コントローラ側でインスタンスを生成していない場合は下記の書き方
+            -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
             %img
             = image.file_field :content, required: true
             = image.hidden_field :status, value: "main"
@@ -25,8 +25,8 @@
             %li.list-group-item.col-md-4
               .image-upload
                 = f.fields_for :captured_images do |image|
-                -# コントローラ側でインスタンスを生成していない場合は下記の書き方
-                -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
+                  -# コントローラ側でインスタンスを生成していない場合は下記の書き方
+                  -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
                   %img
                   = image.file_field :content
                   = image.hidden_field :status, value: "sub"
@@ -47,10 +47,20 @@
         %h4 Tag List
         .row
           .col-md-3
-            %input{type: "text", placeholder: "Web Design"}
+            = text_field_tag :"prototype[tag_list][]", "", placeholder: "Web Design"
           .col-md-3
-            %input{type: "text", placeholder: "UI"}
+            = text_field_tag :"prototype[tag_list][]", "", placeholder: "UI"
           .col-md-3
-            %input{type: "text", placeholder: "Application"}
+            = text_field_tag :"prototype[tag_list][]", "", placeholder: "Application"
+
+          / 『f.text_field』の場合の書きかけ
+          / name属性はテーブルカラムに該当する必要がある。『message[:body]（モデルに沿った場合）』
+          / 下記はビューは生成される。
+          / .col-md-3
+          /   = f.text_field :tag_ids, placeholder: "Web Design"
+          / .col-md-3
+          /   = f.text_field :tag_ids, placeholder: "UI"
+          / .col-md-3
+          /   = f.text_field :tag_ids, placeholder: "Application"
     .row.text-center.proto-btn
       = f.submit "Publish", class: "btn btn-lg btn-primary btn-block"

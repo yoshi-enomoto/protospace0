@@ -53,11 +53,23 @@
       .col-md-12
         %h4 Tag List
         .row
-          .col-md-3
-            %input{type: "text", placeholder: "Web Design"}
-          .col-md-3
-            %input{type: "text", placeholder: "UI"}
-          .col-md-3
-            %input{type: "text", placeholder: "Application"}
+          -@tag_list.each do |tag|
+            .col-md-3
+              = text_field_tag :"prototype[tag_list][]", tag, placeholder: "Input Tag Name"
+
+          -# 3引く『既存入力tag個数』回数、新規入力フォームを生成する。
+          -# コントローラ側で既存入力tag個数を数える。
+          - @length.times do |i|
+            .col-md-3
+              = text_field_tag :"prototype[tag_list][]", "", placeholder: "Input Tag Name"
+
+          / DB値を引っ張ってこない記述
+          / .col-md-3
+          /   = text_field_tag :"prototype[tag_list][]", "", placeholder: "Web Design"
+          / .col-md-3
+          /   = text_field_tag :"prototype[tag_list][]", "", placeholder: "UI"
+          / .col-md-3
+          /   = text_field_tag :"prototype[tag_list][]", "", placeholder: "Application"
+
     .row.text-center.proto-btn
       = f.submit "Publish", class: "btn btn-lg btn-primary btn-block"

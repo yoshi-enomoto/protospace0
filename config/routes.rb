@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   # 『root』でindexを設定している為、下記にindexは不要となる。
   resources :prototypes, except: [:index]
+  # 『param: :name』を記載することで、『:id』部分の変更が可能。
+  # 下記の方法以外に、『to_param』をモデルに定義する方法もある。
+  resources :tags, param: :name, only: [:index, :show]
   resources :users, only: [:show, :edit, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
