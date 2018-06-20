@@ -39,6 +39,8 @@ class PrototypesController < ApplicationController
     @main = @prototype.captured_images.find_by(status: 0)
     @subs = @prototype.captured_images.where(status: 1)
     @prototype.captured_images.build
+    @tag_list = @prototype.tags.pluck(:name)
+    @length = 3 - @tag_list.length
   end
 
   def update
