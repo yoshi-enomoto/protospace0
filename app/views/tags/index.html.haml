@@ -4,15 +4,4 @@
       %h2 Tags List
 
       %ul
-        %li.col-md-4
-          %a.btn.btn-default{href: "#"} aiko
-        %li.col-md-4
-          %a.btn.btn-default{href: "#"} yui
-        %li.col-md-4
-          %a.btn.btn-default{href: "#"} miwa
-        %li.col-md-4
-          %a.btn.btn-default{href: "#"} aiko
-        %li.col-md-4
-          %a.btn.btn-default{href: "#"} yui
-        %li.col-md-4
-          %a.btn.btn-default{href: "#"} miwa
+        = render partial: "tag", collection: @tags
