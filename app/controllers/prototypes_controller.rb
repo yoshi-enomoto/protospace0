@@ -15,8 +15,17 @@ class PrototypesController < ApplicationController
 
   def create
     @prototype = Prototype.new(prototype_params)
+
+    tag_list = params[:prototype][:tag_list]
+    # tag_list = params[:tag_list].split(",")
+    # 『:tag_list』って何？=ビューのformで入力される際に設定しているname属性の値
+    # 『.split』は引数で指定したものを区切りの対象とし、配列にして返す。その為、元の値は『string』である事が条件。
+    # なので、ビュー側でname属性値を『prototype[tag_list][]』に設定し、paramsに入ってくる値を上記の形で配列で取り出す。
+
     if @prototype.save
-        redirect_to root_path, notice: "投稿完了しました。"
+      @prototype.save_prototypes(tag_list)
+      # モデルで定義したメソッドを実行
+      redirect_to root_path, notice: "投稿完了しました。"
     else
       flash.now[:alert] = "投稿が成功出来ませんでした。"
       render :new
@@ -56,6 +65,7 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :user_id,
+      # tag_ids: [],
       captured_images_attributes: [:id, :content, :status]
     )
   end
