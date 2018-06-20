@@ -42,8 +42,11 @@ class PrototypesController < ApplicationController
   end
 
   def update
+    tag_list = params[:prototype][:tag_list]
+
     if current_user.id == @prototype.user.id
       @prototype.update(prototype_params)
+      @prototype.save_prototypes(tag_list)
       redirect_to prototype_path(@prototype), notice: "更新が完了しました。"
     else
       flash.now[:alert] = "更新が完了しませんでした。"
