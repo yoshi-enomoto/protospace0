@@ -53,17 +53,14 @@
           .col-md-3
             = text_field_tag :"prototype[tag_list][]", "", placeholder: "Application"
 
+          / 『f.text_field』の場合の書きかけ
+          / name属性はテーブルカラムに該当する必要がある。『message[:body]（モデルに沿った場合）』
+          / 下記はビューは生成される。
           / .col-md-3
-          /   = f.text_field :name, placeholder: "Web Design"
+          /   = f.text_field :tag_ids, placeholder: "Web Design"
           / .col-md-3
-          /   = f.text_field :name, placeholder: "UI"
+          /   = f.text_field :tag_ids, placeholder: "UI"
           / .col-md-3
-          /   = f.text_field :name, placeholder: "Application"
-
-          /   %input{type: "text", placeholder: "Web Design"}
-          / .col-md-3
-          /   %input{type: "text", placeholder: "UI"}
-          / .col-md-3
-          /   %input{type: "text", placeholder: "Application"}
+          /   = f.text_field :tag_ids, placeholder: "Application"
     .row.text-center.proto-btn
       = f.submit "Publish", class: "btn btn-lg btn-primary btn-block"
