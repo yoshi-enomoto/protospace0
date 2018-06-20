@@ -38,6 +38,9 @@ class Prototype < ActiveRecord::Base
   def save_prototypes(saveprototype_tags)
     current_tag = self.tags.pluck(:name) unless self.tags.nil?
     # 『.pluck』は引数で与えたカラムの値で配列を取得する。
+    # 『.nil?』は存在自体していない場合trueとなる。空が存在していればfalse。
+    # 初回作成時はまっさらな空。（paramsの値が@prototypeに渡っていないから）
+    # 逆に更新時は、前回作成した値を引き出す形となる。
 
     old_tags = current_tag - saveprototype_tags
     new_tags = saveprototype_tags - current_tag
@@ -50,8 +53,10 @@ class Prototype < ActiveRecord::Base
 
     # Create new prototype_tags
     new_tags.each do |new_name|
-      prototype_tag = Tag.find_or_create_by(name: new_name)
-      self.tags << prototype_tag
+      if new_name.present?
+        prototype_tag = Tag.find_or_create_by(name: new_name)
+        self.tags << prototype_tag
+      end
     end
   end
 end
