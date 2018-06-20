@@ -1,6 +1,9 @@
 class Prototype < ActiveRecord::Base
   belongs_to :user
   has_many   :captured_images, dependent: :destroy
+  has_many   :tags, through: :prototype_tags
+  has_many   :prototype_tags, dependent: :destroy
+
 
   # 『protoytpe』にネストされた『captured_image』に対して投稿できるようにする。
   # ネストされているモデルを記載。キーではない。
