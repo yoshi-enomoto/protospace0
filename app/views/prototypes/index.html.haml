@@ -1,16 +1,4 @@
-.jumbotron
-  .container.text-center
-    = image_tag("header_logo.png", alt: "prototype0", height: "73px")
-
-.filter-nav
-  .container
-    .row
-      %ul.nav.nav-pills.col-lg-11
-        %li.active{role: "presentation"}
-          %a{href: "#"} Popular PROTO
-        %li{role: "presentation"}
-          %a{href: "#"} Newest PROTO
-      = link_to "View Tags", tags_path , class: "btn btn-default col-lg-1"
+= render partial: "header_prototype"
 
 .container.proto-list
   .row
