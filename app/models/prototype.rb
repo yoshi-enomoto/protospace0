@@ -1,8 +1,9 @@
 class Prototype < ActiveRecord::Base
   belongs_to :user
   has_many   :captured_images, dependent: :destroy
-  has_many   :tags, through: :prototype_tags
+  # 『through』を帝具する場合、先に関連物を実施させる必要がある。
   has_many   :prototype_tags, dependent: :destroy
+  has_many   :tags, through: :prototype_tags
 
 
   # 『protoytpe』にネストされた『captured_image』に対して投稿できるようにする。
