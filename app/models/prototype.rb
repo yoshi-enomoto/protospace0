@@ -33,4 +33,25 @@ class Prototype < ActiveRecord::Base
     # 『%d』は日にち
     # 『%a』は曜日の省略名
   end
+
+  # タグ用の処理（引数では配列を渡している）
+  def save_prototypes(saveprototype_tags)
+    current_tag = self.tags.pluck(:name) unless self.tags.nil?
+    # 『.pluck』は引数で与えたカラムの値で配列を取得する。
+
+    old_tags = current_tag - saveprototype_tags
+    new_tags = saveprototype_tags - current_tag
+    # この処理は、配列から配列を除外している。
+
+    # Destroy old prototype_tags
+    old_tags.each do |old_name|
+      self.tags.delete Tag.find_by(name: old_name)
+    end
+
+    # Create new prototype_tags
+    new_tags.each do |new_name|
+      prototype_tag = Tag.find_or_create_by(name: new_name)
+      self.tags << prototype_tag
+    end
+  end
 end
