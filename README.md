@@ -18,7 +18,7 @@
 
 # Structure of DataBase
 
-## Userテーブル
+## Usersテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false, unique: true|
@@ -37,7 +37,7 @@ has_many :comments
 ```
 
 
-## Prototypeテーブル
+## Prototypesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |title|string|null: false|
@@ -51,10 +51,12 @@ has_many :captured_images
 has_many :likes
 has_many :comments
 belongs_to :user
+has_many :tags, through: :prototype_tags
+has_many :prototype_tags, dependent: :destroy
 ```
 
 
-## CapturedImageテーブル
+## CapturedImagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |content|string|-gem-|
@@ -67,7 +69,7 @@ belongs_to :prototype
 ```
 
 
-## Likeテーブル
+## Likesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false, foreign_key: true|
@@ -80,7 +82,7 @@ belongs_to :prototype
 ```
 
 
-## Commentテーブル
+## Commentsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |content|text|null: false |
@@ -91,4 +93,29 @@ belongs_to :prototype
 ```
 belongs_to :user
 belongs_to :prototype
+```
+
+
+## Tagsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false, unique: true|
+
+### association
+```
+has_many :prototypes, through: :prototype_tags
+has_many :prototype_tags, dependent: :destroy
+```
+
+
+## PrototypeTagsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|prototype|references|null: false, foreign_key: true|
+|tag|references|null: false, foreign_key: true|
+
+### association
+```
+belongs_to :prototype
+belongs_to :tag
 ```
