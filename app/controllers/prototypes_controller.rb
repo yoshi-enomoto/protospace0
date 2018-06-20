@@ -33,6 +33,7 @@ class PrototypesController < ApplicationController
   end
 
   def show
+    @tags = @prototype.tags
   end
 
   def edit
