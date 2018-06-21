@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root "prototypes#index"
 
   # 『root』でindexを設定している為、下記にindexは不要となる。
-  resources :prototypes, except: [:index]
+  resources :prototypes, except: :index do
+    resources :comments, only: :create
+  end
   # 『param: :name』を記載することで、『:id』部分の変更が可能。
   # 下記の方法以外に、『to_param』をモデルに定義する方法もある。
   resources :tags, param: :name, only: [:index, :show]
