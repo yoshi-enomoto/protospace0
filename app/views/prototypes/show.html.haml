@@ -58,6 +58,7 @@
 
       = form_for [@prototype,@comment], remote: true, html: {class: "form-inline", role: "form"} do |f|
         -# 『remote: ture』を付加することで、ページを更新しないでリクエストだけ投げてくれる。
+        -# 上記を設定した理由は、jsonによる画像の差込が出来ない為。
         %h4 Write a comment
         .row
           .form-group.col-md-10
