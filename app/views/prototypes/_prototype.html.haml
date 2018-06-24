@@ -19,7 +19,7 @@
       .proto-meta
         .proto-user
           -# user_pathの引数は、『prototypel.user』で良い（.idが付いても良い）
-          = link_to "#{prototype.user.name}", user_path(prototype.user)
+          = link_to "by #{prototype.user.name}", user_path(prototype.user)
         .proto-posted
           = prototype.posted_date
       %ul.proto-tag-list.list-inline
