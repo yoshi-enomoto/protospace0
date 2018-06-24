@@ -56,7 +56,8 @@
       #comment_list
         = render partial: "comment", collection: @comments
 
-      = form_for [@prototype,@comment], html: {class: "form-inline", role: "form"} do |f|
+      = form_for [@prototype,@comment], remote: true, html: {class: "form-inline", role: "form"} do |f|
+        -# 『remote: ture』を付加することで、ページを更新しないでリクエストだけ投げてくれる。
         %h4 Write a comment
         .row
           .form-group.col-md-10
