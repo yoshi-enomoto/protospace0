@@ -3,7 +3,17 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save
-      redirect_to prototype_path(@comment.prototype_id), notice: "コメント投稿完了"
+      @prototype = Prototype.find(params[:prototype_id])
+      @comments = @prototype.comments
+      @comment_counts = @comments.length
+
+      respond_to do |format|
+        format.html { redirect_to prototype_path(@comment.prototype_id)}
+        # フォーム『remote: true』により、リクエストはAjaxリクエストでやってくる。
+        # jsを探しているので、下記を記述することでコントローラが応答可能となる。
+        # 対応するファイルは、『アクション.js.erb』となる。
+        format.js
+      end
     else
       flash.now[:alert] = "コメントが投稿出来ませんでした。"
       @tags = @prototype.tags
