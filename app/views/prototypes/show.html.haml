@@ -87,10 +87,11 @@
               %span.anchorjs-icon
           %p Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
           %p Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      %form.form-inline{role: "form"}
+
+      = form_for [@prototype,@comment], html: {class: "form-inline", role: "form"} do |f|
         %h4 Write a comment
         .row
           .form-group.col-md-10
-            %textarea.form-control{placeholder: "Your comments", rows: "3"}
+            = f.text_area :content, rows: "3", placeholder: "Your comments", class: "form-control"
           .form-group.col-md-2
-            %button.btn.btn-primary Comment
+            = f.submit "Comment", class: "btn btn-primary"
