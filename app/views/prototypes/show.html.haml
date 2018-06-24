@@ -56,12 +56,13 @@
       #comment_list
         = render partial: "comment", collection: @comments
 
-      = form_for [@prototype,@comment], remote: true, html: {class: "form-inline", role: "form"} do |f|
-        -# 『remote: ture』を付加することで、ページを更新しないでリクエストだけ投げてくれる。
-        -# 上記を設定した理由は、jsonによる画像の差込が出来ない為。
-        %h4 Write a comment
-        .row
-          .form-group.col-md-10
-            = f.text_area :content, rows: "3", placeholder: "Your comments", class: "form-control"
-          .form-group.col-md-2
-            = f.submit "Comment", class: "btn btn-primary"
+      - if user_signed_in?
+        = form_for [@prototype,@comment], remote: true, html: {class: "form-inline", role: "form"} do |f|
+          -# 『remote: ture』を付加することで、ページを更新しないでリクエストだけ投げてくれる。
+          -# 上記を設定した理由は、jsonによる画像の差込が出来ない為。
+          %h4 Write a comment
+          .row
+            .form-group.col-md-10
+              = f.text_area :content, rows: "3", placeholder: "Your comments", class: "form-control"
+            .form-group.col-md-2
+              = f.submit "Comment", class: "btn btn-primary"
