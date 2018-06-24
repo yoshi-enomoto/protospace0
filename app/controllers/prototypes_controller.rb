@@ -34,6 +34,7 @@ class PrototypesController < ApplicationController
 
   def show
     @tags = @prototype.tags
+    @comment = Comment.new
   end
 
   def edit
