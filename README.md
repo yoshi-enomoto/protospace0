@@ -44,6 +44,7 @@ has_many :comments
 |catch_copy|string|null: false|
 |concept|text|null: false|
 |user|references|null: false, foreign_key: true|
+|likes_count|integer|default: 0|
 
 ### association
 ```
