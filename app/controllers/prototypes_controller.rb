@@ -37,6 +37,7 @@ class PrototypesController < ApplicationController
     @comment = Comment.new
     @comments = @prototype.comments
     @comment_counts = @comments.length
+    @like = Like.find_by(user_id: current_user.id, prototype_id: params[:id])
   end
 
   def edit
