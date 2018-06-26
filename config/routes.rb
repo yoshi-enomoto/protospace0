@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # 『root』でindexを設定している為、下記にindexは不要となる。
   resources :prototypes, except: :index do
     resources :comments, only: :create
+    resources :likes, only: [:create, :destroy]
   end
   # 『param: :name』を記載することで、『:id』部分の変更が可能。
   # 下記の方法以外に、『to_param』をモデルに定義する方法もある。
