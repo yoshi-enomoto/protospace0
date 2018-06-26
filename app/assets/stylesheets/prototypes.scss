@@ -659,3 +659,14 @@ body {
 .button_to button {
   max-width: 99px;
 }
+.btn.btn-default {
+  cursor: default;
+  &:hover {
+    background: #fff;
+    border: 1px solid #eee;
+  }
+  img {
+    max-width: 18px;
+    margin-right: 5px;
+  }
+}
