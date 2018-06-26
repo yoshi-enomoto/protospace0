@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     # ここを通る時は、『:id』が『:prototype_id』に変化している。
     # @like = Like.crate(user_id: current_user.id, prototype_id: params[:prototype_id])
