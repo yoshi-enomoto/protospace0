@@ -2,7 +2,9 @@ class Prototype < ActiveRecord::Base
   belongs_to :user
   has_many   :captured_images, dependent: :destroy
   has_many   :comments
-  # 『through』を帝具する場合、先に関連物を実施させる必要がある。
+  has_many   :likes, dependent: :destroy
+  # 『dependent: :destroy』親モデルを削除した場合、関連する子モデルのレコードをどうする（削除する）かの設定。
+  # 『through』を定義する場合、先に関連物を実施させる必要がある。
   has_many   :prototype_tags, dependent: :destroy
   has_many   :tags, through: :prototype_tags
 
