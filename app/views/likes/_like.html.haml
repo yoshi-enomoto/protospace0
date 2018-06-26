@@ -1,0 +1,20 @@
+-# 初回表示時は『prototype#show』を通ってくる為、そっちのコントローラー側にも必要なインスタンスを設定する。
+-# ajax通信時に初めて、likeコントローラーの『create』や『destroy』アクション内のインスタンスが必要とされる。
+- if user_signed_in?
+  - if prototype.likes.find_by(user_id: current_user.id)
+    -# prototypeに関する全てのlikeから、カレントユーザーが付けたlikeレコードのみを取得。
+    = button_to prototype_like_path(id: like.id, prototype_id: prototype.id), class: "btn btn-default", method: :delete, remote: true do
+      -# 『create』アクション時、ビュー展開において『id』が渡らなかった為、『id: like.id』とすることで、like取り消し時に削除するレコードid（likeテーブル内）が渡る。
+      = image_tag("icon_heart_red.svg")
+      Like
+      %span.num= prototype.likes_count
+  - else
+    = button_to prototype_likes_path(prototype), class: "btn btn-default", remote: true do
+      = image_tag("icon_heart.svg")
+      Like
+      %span.num= prototype.likes_count
+- else
+  %button.btn.btn-default
+    = image_tag("icon_heart.svg")
+    Like
+    %span.num= prototype.likes_count
