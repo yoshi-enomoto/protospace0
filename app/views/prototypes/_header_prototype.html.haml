@@ -6,8 +6,10 @@
   .container
     .row
       %ul.nav.nav-pills.col-lg-11
-        %li.active{role: "presentation"}
-          %a{href: "#"} Popular PROTO
-        %li{role: "presentation"}
-          %a{href: "#"} Newest PROTO
+        / 『current_page?(引数)』により、表示中のページを判定することが可能。
+        / 『&&』以降に記述した名称をクラスに追加することができる。
+        %li{role: "presentation", class: current_page?(root_path) && "active"}
+          = link_to "Popular PROTO", root_path
+        %li{role: "presentation", class: current_page?(newests_path) && "active"}
+          = link_to "Newest PROTO", newests_path
       = link_to "View Tags", tags_path , class: "btn btn-default col-lg-1"
