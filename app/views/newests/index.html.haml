@@ -1,0 +1,8 @@
+= render partial: "prototypes/header_prototype"
+
+.container.proto-list
+  .row
+    = render partial: "prototypes/prototype", collection: @prototypes
+
+.text-center
+  =paginate @prototypes, window: 3
