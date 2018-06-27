@@ -1,7 +1,8 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :edit, :update, :destroy]
   def index
-    @prototypes = Prototype.includes(:user).order("created_at ASC").page(params[:page]).per(5)
+    # Popularを表示する為に、DESC用のカラムを変更
+    @prototypes = Prototype.includes(:user).order("likes_count DESC").page(params[:page]).per(5)
   end
 
   def new
