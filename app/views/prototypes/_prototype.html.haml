@@ -1,6 +1,7 @@
 -# 部分テンプレートでは、『@』を使用しないで取り出しが可能。
 .col-sm-4.col-md-3.proto-content
-  - if prototype.user_id == current_user.id
+  -# prototype投稿者がカレントユーザーである、の条件以外に、ログインしているか、の条件も必要。
+  - if user_signed_in? && prototype.user_id == current_user.id
     .dropdown.drop_menu_location
       %button.btn.btn-default.dropdown-toggle(data-toggle="dropdown" id="dropdownMenu")
         Action
@@ -19,7 +20,7 @@
       .proto-meta
         .proto-user
           -# user_pathの引数は、『prototypel.user』で良い（.idが付いても良い）
-          = link_to "#{prototype.user.name}", user_path(prototype.user)
+          = link_to "by #{prototype.user.name}", user_path(prototype.user)
         .proto-posted
           = prototype.posted_date
       %ul.proto-tag-list.list-inline

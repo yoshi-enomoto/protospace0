@@ -1,0 +1,8 @@
+.media
+  .media-left
+    = link_to user_path(comment.user) do
+      = image_tag(comment.user.avatar.thumb, alt: "profile_photo", class: "media-object", style: "width: 64px; height: 64px;")
+  .media-body
+    %h4.media-heading
+      = link_to "#{comment.user.name}", user_path(comment.user), class: "anchorjs-link"
+    %p= comment.content

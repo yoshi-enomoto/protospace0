@@ -1,0 +1,7 @@
+$('#comment_content').val('');
+$('#comment_list').html(
+  '<%= j(render partial: 'prototypes/comment', collection: @comments) %>'
+);
+  // 『j』はescape_javascriptのエイリアス。改行と括弧をエスケープ（無効化）してくれるメソッド。
+  // js的に partial ファイルを render する場合、エスケープが必要。
+$('.proto-comments .num').html("(<%= @comment_counts %>)");

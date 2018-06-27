@@ -1,7 +1,8 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :edit, :update, :destroy]
   def index
-    @prototypes = Prototype.includes(:user).order("created_at ASC").page(params[:page]).per(5)
+    # Popularを表示する為に、DESC用のカラムを変更
+    @prototypes = Prototype.includes(:user).order("likes_count DESC").page(params[:page]).per(5)
   end
 
   def new
@@ -34,6 +35,15 @@ class PrototypesController < ApplicationController
 
   def show
     @tags = @prototype.tags
+    @comment = Comment.new
+    @comments = @prototype.comments
+    @comment_counts = @comments.length
+    if user_signed_in?
+    # if user_signed_in? && Like.exists?(prototype_id: params[:id], user_id: current_user.id)
+    # 『exists?(引数)』で引数の条件にあったものが存在しているか判定する。
+    # 返り値はfalse or true。
+      @like = Like.find_by(user_id: current_user.id, prototype_id: params[:id])
+    end
   end
 
   def edit
