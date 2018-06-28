@@ -15,9 +15,9 @@
           = f.fields_for :captured_images do |image|
             -# コントローラ側でインスタンスを生成していない場合は下記の書き方
             -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
-            %img
             = image.file_field :content, required: true
             = image.hidden_field :status, value: "main"
+            #main_preview
       .col-md-12
         %ul.proto-sub-list.list-group
           -# サブ画像は３つまでの為、このように記述する（コントローラ側で設定してない為）
