@@ -11,9 +11,9 @@
           = f.fields_for :captured_images, @main do |image|
             -# 『:captured_images』の後にインスタンス変数を記載することで、コントローラから値を呼び出している。
             -# 呼び出している値は、新規作成時に保存したもの。
-            %img
-            = image.file_field :content, required: true
             = image.hidden_field :status, value: "main"
+            = image.file_field :content, required: true
+            #main_preview
       .col-md-12
         %ul.proto-sub-list.list-group
           - 3.times do |i|
@@ -26,17 +26,17 @@
                 .image-upload
                   = f.fields_for :captured_images, @sub do |image|
                     / = f.fields_for :captured_images, @prototype.captured_images.where(status: 1) do |image|
-                    %img
-                    = image.file_field :content
                     = image.hidden_field :status, value: "sub"
+                    = image.file_field :content
+                    %div{id: "sub_#{i+1}_preview"}
               - else
                 -# 新規追加時（ビューのnewと同じ原理）
                 .image-upload
                   = f.fields_for :captured_images do |image|
                     / = f.fields_for :captured_images, @prototype.captured_images.where(status: 1) do |image|
-                    %img
-                    = image.file_field :content
                     = image.hidden_field :status, value: "sub"
+                    = image.file_field :content
+                    %div{id: "sub_#{i+1}_preview"}
           -# 静的ページ時の記述を残す（３つ目がアイコン『+』で表示されていたので）
             %li.list-group-item.col-md-4
               .image-upload
