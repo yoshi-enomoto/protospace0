@@ -1,4 +1,4 @@
-$(function(){
+$(document).on("turbolinks:load", function() {
   //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
   $('form').on('change', 'input[type="file"]', function(e) {
     // 『e.target』でイベントが発生したDOM要素を取得。
