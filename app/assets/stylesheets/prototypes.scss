@@ -671,10 +671,25 @@ body {
   }
 }
 
-#main_preview,
-#sub_1_preview,
-#sub_2_preview,
-#sub_3_preview {
-  height: 100%;
-  width: 100%;
+// #main_preview,
+// #sub_1_preview,
+// #sub_2_preview,
+// #sub_3_preview {
+//   height: 100%;
+//   width: 100%;
+// }
+
+.cover-image-upload {
+  #main_preview img {
+    height: 500px;
+    width: 730px;
+  }
+}
+.image-upload {
+  #sub_1_preview img,
+  #sub_2_preview img,
+  #sub_3_preview img {
+    height: 200px;
+    width: 213px;
+  }
 }
