@@ -11,32 +11,37 @@
           = f.fields_for :captured_images, @main do |image|
             -# 『:captured_images』の後にインスタンス変数を記載することで、コントローラから値を呼び出している。
             -# 呼び出している値は、新規作成時に保存したもの。
-            %img
-            = image.file_field :content, required: true
             = image.hidden_field :status, value: "main"
+            = image.file_field :content
+            -# 『required: true』を削除（DBから値を呼んでいるが、再添付アナウンスが出る為）
+            #main_preview
+              = image_tag(@main.content)
       .col-md-12
         %ul.proto-sub-list.list-group
           - 3.times do |i|
             -# この中の処理を3回実施する、ifルート、elseルート含めて。
             %li.list-group-item.col-md-4
-              - if @subs
+              - @sub = @subs[i]
+              - unless @sub.nil?
+                / true
                 -# 条件分岐を入れることで既存の更新、もしくは新規追加かを切り分ける
-                - @sub = @subs[i]
                 -# 『@subs』は配列なので、展開する。
                 .image-upload
                   = f.fields_for :captured_images, @sub do |image|
                     / = f.fields_for :captured_images, @prototype.captured_images.where(status: 1) do |image|
-                    %img
-                    = image.file_field :content
                     = image.hidden_field :status, value: "sub"
+                    = image.file_field :content
+                    %div{id: "sub_#{i+1}_preview"}
+                      = image_tag(@sub.content)
               - else
+                / false
                 -# 新規追加時（ビューのnewと同じ原理）
                 .image-upload
                   = f.fields_for :captured_images do |image|
                     / = f.fields_for :captured_images, @prototype.captured_images.where(status: 1) do |image|
-                    %img
-                    = image.file_field :content
                     = image.hidden_field :status, value: "sub"
+                    = image.file_field :content
+                    %div{id: "sub_#{i+1}_preview"}
           -# 静的ページ時の記述を残す（３つ目がアイコン『+』で表示されていたので）
             %li.list-group-item.col-md-4
               .image-upload

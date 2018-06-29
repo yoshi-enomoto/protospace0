@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @prototypes = @user.prototypes.includes(:user).order("created_at ASC").page(params[:page]).per(5)
+    @prototypes_count = @user.prototypes.includes(:user).length
   end
 
   def edit

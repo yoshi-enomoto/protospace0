@@ -16,4 +16,6 @@
 
 *.jpeg
 
+*.ico
+
 config/cloudinary.yml

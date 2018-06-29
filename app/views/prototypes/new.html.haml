@@ -15,9 +15,9 @@
           = f.fields_for :captured_images do |image|
             -# コントローラ側でインスタンスを生成していない場合は下記の書き方
             -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
-            %img
-            = image.file_field :content, required: true
             = image.hidden_field :status, value: "main"
+            = image.file_field :content, required: true
+            #main_preview
       .col-md-12
         %ul.proto-sub-list.list-group
           -# サブ画像は３つまでの為、このように記述する（コントローラ側で設定してない為）
@@ -27,9 +27,9 @@
                 = f.fields_for :captured_images do |image|
                   -# コントローラ側でインスタンスを生成していない場合は下記の書き方
                   -# = f.fields_for :captured_images, @prototype.captured_images.build do |image|
-                  %img
-                  = image.file_field :content
                   = image.hidden_field :status, value: "sub"
+                  = image.file_field :content
+                  %div{id: "sub_#{i+1}_preview"}
           -# 静的ページ時の記述を残す（３つ目がアイコン『+』で表示されていたので）
             %li.list-group-item.col-md-4
               .image-upload
