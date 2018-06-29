@@ -13,8 +13,10 @@
 - 未定
 
 ## 特記事項
-- 現段階では特に無し。
-
+- ローカル環境で実行する際、cloudinaryに関する記述の影響でエラーが生じるため、実行する際は下記３つを解除する。
+  ・『gem "cloudinary"』を削除
+  ・2つのimage_uploader.rbファイルについて、画像の保存先を『storage :file』のみにする、production、depelopment環境問わず。（7~11行目）
+  ・
 
 # Structure of DataBase
 
